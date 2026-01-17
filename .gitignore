@@ -1,2 +1,4 @@
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGq3NYuCefAKIaw4XQ/sh1xPHrM9207Mro8K1TPn2EbF ralphpig@ralphpute0
+secrets/
 secrets.nix
 hardware-configuration.nix
