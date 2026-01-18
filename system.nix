@@ -3,22 +3,36 @@
   ...
 }:
 
+let
+  cfg = import ./local.nix;
+in
 {
-  imports = [
-    ./services.nix
-  ];
+  _module.args.cfg = cfg;
+
+  time.timeZone = "America/New_York";
+  networking = {
+    hostName = "nixos-lab-proxy";
+  };
+
+  services.openssh = {
+    enable = true;
+    settings.permitRootLogin = "prohibit-password";
+  };
+
+  users.users.root = {
+    openssh.authorizedKeys.keys = cfg.root_user.public_ssh_keys
+  };
 
   system.autoUpgrade = {
     enable = true;
     allowReboot = true;
+    randomizedDelaySec = "30min";
     dates = "03:00";
     rebootWindow = {
       lower = "03:00";
       upper = "05:00";
     };
   };
-
-  time.timeZone = "America/New_York";
 
   programs.neovim = {
     enable = true;
@@ -40,8 +54,4 @@
     wget
     ripgrep
   ];
-
-  networking = {
-    hostName = "nixos-lab-proxy";
-  };
 }

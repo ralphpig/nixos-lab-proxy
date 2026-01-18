@@ -9,4 +9,10 @@
   lab1 = {
     ip = "10.0.0.100"; # ip of lab1 server to route to
   };
+
+  root_user = {
+    ssh_public_keys = [
+      "ssh-ed25519 ..."
+    ]
+  };
 }
