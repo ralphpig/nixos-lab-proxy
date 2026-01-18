@@ -11,6 +11,7 @@
   };
 
   root_user = {
+    # DigitalOcean image already pre-loads SSH assigned during Droplet creation
     ssh_public_keys = [
       "ssh-ed25519 ..."
     ]

@@ -16,11 +16,12 @@ in
 
   services.openssh = {
     enable = true;
-    settings.permitRootLogin = "prohibit-password";
+    # Default in DigitalOcean image
+    # settings.permitRootLogin = "prohibit-password";
   };
 
   users.users.root = {
-    openssh.authorizedKeys.keys = cfg.root_user.public_ssh_keys
+    openssh.authorizedKeys.keys = cfg.root_user.ssh_public_keys;
   };
 
   system.autoUpgrade = {
