@@ -4,10 +4,15 @@
 }:
 
 let
-  cfg = import ./local.nix;
+  cfg = import ./env.nix;
 in
 {
   _module.args.cfg = cfg;
+
+  # Ensure that all secret files' permission are set properly
+  system.activationScripts.fixSecrets.text = ''
+    ${pkgs.systemd}/bin/systemd-tmpfiles --create
+  '';
 
   time.timeZone = "America/New_York";
   networking = {
@@ -41,7 +46,7 @@ in
     viAlias = true;
     defaultEditor = true;
     configure = {
-      customRC  = ''
+      customRC = ''
         set shiftwidth=2 smarttab
         set expandtab
         set tabstop=8 softtabstop=0

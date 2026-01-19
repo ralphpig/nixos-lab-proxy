@@ -4,7 +4,7 @@
 
 {
   systemd.tmpfiles.rules = [
-    "d /etc/nixos/secrets 0700 root root -"
+    "d /etc/credentials 0700 root root -"
   ];
 
   imports = [

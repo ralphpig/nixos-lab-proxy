@@ -1,2 +1,2 @@
 secrets/
-local.nix
+env.nix

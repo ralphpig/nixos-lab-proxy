@@ -5,12 +5,12 @@
 
 {
   systemd.tmpfiles.rules = [
-    "z /etc/nixos/secrets/wireguard-private-key 0600 root root -"
+    "z /etc/credentials/wireguard-private-key 0600 root root -"
   ];
 
   systemd.services.wireguard-wg0.serviceConfig = {
     LoadCredential = [
-      "wireguard-private-key:/etc/nixos/secrets/wireguard-private-key"
+      "wireguard-private-key:/etc/credentials/wireguard-private-key"
     ];
   };
 
@@ -24,7 +24,7 @@
         ips = cfg.wireguard.ips;
         listenPort = 51820;
 
-        privateKeyFile  = "/run/credentials/wireguard-wg0.service/wireguard-private-key";
+        privateKeyFile = "/run/credentials/wireguard-wg0.service/wireguard-private-key";
 
         peers = [
           {
