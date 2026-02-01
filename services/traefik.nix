@@ -6,6 +6,9 @@
 {
   networking.firewall.allowedUDPPorts = [
     34197
+  ];
+
+  networking.firewall.allowedTCPPorts = [
     25565
   ];
 
@@ -41,6 +44,7 @@
 
       # Minecraft
       tcp.routers.minecraft = {
+        rule = "HostSNI(`*`)";
         service = "minecraft";
         entryPoints = [ "minecraft_tcp" ];
       };
