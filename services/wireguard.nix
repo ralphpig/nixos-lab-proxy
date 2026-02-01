@@ -16,7 +16,8 @@
 
   networking = {
     firewall = {
-      allowedUDPPorts = [ 51820 ];
+      # Since this is the sole connection initiator, we don't need to have this port open
+      # allowedUDPPorts = [ 51820 ];
     };
 
     wireguard.interfaces = {

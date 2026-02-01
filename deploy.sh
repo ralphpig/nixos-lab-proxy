@@ -6,8 +6,15 @@ if [[ -z "${NIXOS_HOST:-}" ]]; then
   exit 1
 fi
 
-# Will place secrets in /etc/credentials if it already exists
-# scp -r ./secrets ${NIXOS_HOST}:/etc/credentials;
+rsync -rv \
+  --delete \
+  --exclude './secrets/' \
+  --rsync-path="sudo rsync" \
+  ./ ${NIXOS_HOST}:/etc/nixos/;
 
-rsync -rv --delete ./secrets/ ${NIXOS_HOST}:/etc/credentials/;
+rsync -rv \
+  --delete \
+  --rsync-path="sudo rsync" \
+  ./secrets/ ${NIXOS_HOST}:/etc/credentials/;
+
 nixos-rebuild --target-host ${NIXOS_HOST} -I nixos-config=./configuration.nix switch;
