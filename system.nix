@@ -30,7 +30,9 @@ in
   };
 
   system.autoUpgrade = {
-    enable = true;
+    # TODO: cannot auto-upgrade since host doesn't have enough memory
+    enable = false;
+
     allowReboot = true;
     randomizedDelaySec = "30min";
     dates = "03:00";

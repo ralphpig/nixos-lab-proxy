@@ -17,4 +17,8 @@ rsync -rv \
   --rsync-path="sudo rsync" \
   ./secrets/ ${NIXOS_HOST}:/etc/credentials/;
 
-nixos-rebuild --target-host ${NIXOS_HOST} -I nixos-config=./configuration.nix switch;
+nixos-rebuild \
+  --sudo \
+  -I nixos-config=./configuration.nix \
+  --target-host "${NIXOS_HOST}" \
+  switch "$@";
