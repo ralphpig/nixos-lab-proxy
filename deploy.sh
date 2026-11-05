@@ -10,15 +10,15 @@ rsync -rv \
   --delete \
   --exclude './secrets/' \
   --rsync-path="sudo rsync" \
-  ./ ${NIXOS_HOST}:/etc/nixos/;
+  ./ ${NIXOS_HOST}:/etc/nixos/
 
 rsync -rv \
   --delete \
   --rsync-path="sudo rsync" \
-  ./secrets/ ${NIXOS_HOST}:/etc/credentials/;
+  ./secrets/ ${NIXOS_HOST}:/etc/credentials/
 
 nixos-rebuild \
   --sudo \
   -I nixos-config=./configuration.nix \
   --target-host "${NIXOS_HOST}" \
-  switch "$@";
+  switch "$@"

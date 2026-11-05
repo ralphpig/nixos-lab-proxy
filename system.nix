@@ -29,6 +29,10 @@ in
     openssh.authorizedKeys.keys = cfg.root_user.ssh_public_keys;
   };
 
+  nix.settings = {
+    extra-experimental-features = [ "nix-command" ];
+  };
+
   system.autoUpgrade = {
     # TODO: cannot auto-upgrade since host doesn't have enough memory
     enable = false;
@@ -40,6 +44,12 @@ in
       lower = "03:00";
       upper = "05:00";
     };
+  };
+
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 2";
   };
 
   programs.neovim = {
